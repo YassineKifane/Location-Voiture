@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    #Form
+    <record id='voiture_brand_form' model='ir.ui.view'>
+        <field name="name">voiture.cars.form</field>
+        <field name="model">voiture.cars</field>
+        <field name="arch" type="xml">
+            <form string="Model">
+                <sheet>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image_128" widget='image' class="oe_avatar"/>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name" placeholder="ex. Stepway"/>
+                        </h1>
+                        <label for="brand_id" class="oe_edit_only"/>
+                        <h2>
+                            <field name="brand_id" placeholder="ex. Dacia"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="longeur" placeholder="Longeur"/>
+                            <field name="largeur" placeholder="Largeur"/>
+                            <field name="hauteur" placeholder="Hauteur"/>
+                            <field name="nbrplace" placeholder="Nombre de Porte"/>
+                            <field name="nbrcylinder" placeholder="Nombre de Cylinder"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="matricule"/>
+                            <field name="energie" placeholder="Energie"/>
+                            <field name="transmission" placeholder="Transmission"/>
+                            <field name="couleur" placeholder="Couleur"/>
+                            <field name="prix" placeholder="Prix Par Jour"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    #Tree
+    <record id='voiture_brand_tree' model='ir.ui.view'>
+        <field name="name">voiture.cars.tree</field>
+        <field name="model">voiture.cars</field>
+        <field name="arch" type="xml">
+            <tree string="Models">
+                <field name="brand_id" />
+                <field name="name" />
+                <field name="transmission" />
+                <field name="energie" />
+
+            </tree>
+        </field>
+    </record>
+
+    #Search
+    <record id='voiture_brand_search' model='ir.ui.view'>
+        <field name="name">voiture.cars.search</field>
+        <field name="model">voiture.cars</field>
+        <field name="arch" type="xml">
+            <search string="Vehicles costs" >
+                <field name="brand_id" />
+                <field name="matricule" />
+                <group expand="1" string="Group By">
+                    <filter name="groupby_brand" context="{'group_by' : 'brand_id'}" string="Marque"/>
+                    <filter name="groupby_energie" context="{'group_by' : 'energie'}" string="Energie"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    #Graph
+    <record id="voiture_brand_graph" model="ir.ui.view">
+        <field name="name">voiture.cars.graph</field>
+        <field name="model">voiture.cars</field>
+        <field name="arch" type="xml">
+            <graph string="Brands" sample="3">
+                <field name="brand_id"/>
+            </graph>
+        </field>
+    </record>
+
+    #Action for Brand
+    <record id='voiture_brand_action' model='ir.actions.act_window'>
+        <field name="name">Voitures Model</field>
+        <field name="res_model">voiture.cars</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="context">{"search_default_groupby_brand" : True}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new model
+          </p><p>
+            You can define several models (e.g. A3, A4) for each marque (Audi).
+          </p>
+        </field>
+    </record>
+
+
+
+
+    ---------------------------------------------------------
+    #tree
+    <record id='voiture_model_tree' model='ir.ui.view'>
+        <field name="name">vehicle.brand.tree</field>
+        <field name="model">vehicle.brand</field>
+        <field name="arch" type="xml">
+            <tree string="Model Marque">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    #Kanban
+    <record id='voiture_model_kanban' model='ir.ui.view'>
+        <field name="name">vehicle.brand.kanban</field>
+        <field name="model">vehicle.brand</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="name" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_vignette oe_semantic_html_override oe_kanban_global_click">
+                            <a type="open" href="#" class="o_kanban_image oe_kanban_action">
+                                <img alt="Open" t-att-src="kanban_image('vehicle.brand', 'image_128', record.id.raw_value)" class="img-fluid" style="width:100px;"/>
+                            </a>
+                            <div class="oe_kanban_details">
+                                <h4 class="oe_partner_heading">
+                                    <a type="open" class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="o_kanban_button">
+                                <a type="object" name="action_brand_model" class="oe_kanban_action oe_kanban_action_a">
+                                    <field name="model_count"/>
+                                MODELS
+                                </a>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    #Form
+    <record id='voiture_model_form' model='ir.ui.view'>
+        <field name="name">vehicle.brand.form</field>
+        <field name="model">vehicle.brand</field>
+        <field name="arch" type="xml">
+            <form string="Model Marque">
+                <sheet>
+                    <group>
+                        <div>
+                            <field name="image_128" widget="image" class="oe_avatar"/>
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    #ACTION
+    <record id="voiture_model_action" model="ir.actions.act_window">
+        <field name="name">Manufacturers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">vehicle.brand</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Inserez Vos Informations
+            </p>
+        </field>
+    </record>
+
+    #MENU
+
+    <menuitem
+            id="Voiture_root"
+            name="Voitures"
+            parent="location_voiture"
+    />
+    <menuitem
+            id="sub_voiture_root"
+            name="Manufacturers"
+            action="voiture_model_action"
+            parent="Voiture_root"
+            sequence="10"
+
+    />
+
+        <menuitem
+            id="sub2_voiture_root"
+            name="Voitures Model"
+            action="voiture_brand_action"
+            parent="Voiture_root"
+            sequence="20"
+
+    />
+
+
+</odoo>

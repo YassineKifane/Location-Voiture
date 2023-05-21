@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    #Search
+    <record id="client_search" model="ir.ui.view">
+        <field name="name">voiture.client.search</field>
+        <field name="model">voiture.client</field>
+        <field name="arch" type="xml">
+            <search string="Client">
+                <field name="name"/>
+                <field name="identite"/>
+                <separator/>
+                <group expand="1" string="Group_by">
+                    <filter string="Type" name="Type de Contrat" context="{'group_by':'Type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    #tree
+    <record id="client_tree" model="ir.ui.view">
+        <field name="name">voiture.client.tree</field>
+        <field name="model">voiture.client</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="name"/>
+                <field name="Type"/>
+                <field name="mobile"/>
+            </tree>
+        </field>
+    </record>
+
+    #Formulaire
+
+    <record id="client_form" model="ir.ui.view">
+        <field name="name">voiture.client.form</field>
+        <field name="model">voiture.client</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <field name="image_1920" widget='image' class="oe_avatar"
+                           options='{"zoom": true, "preview_image":"image_128"}'/>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                            <field name="name" placeholder="Nom du Client" required="True"/>
+                        </h1>
+                        <field name="Type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="region" placeholder="Région"/>
+                            <field name="identite" placeholder="Matricule" />
+                            <field attrs="{'invisible': [('Type', '!=', 'client')]}" name="genre" placeholder="Genre"/>
+                            <field name="mobile" placeholder="Tél" />
+                            <field name="email" placeholder="Email"/>
+                        </group>
+                        <group>
+                            <field attrs="{'invisible': [('Type', '!=', 'client')]}"  name="date_de_naissance" placeholder="Date de Naissance" />
+                            <field attrs="{'invisible': [('Type', '!=', 'client')]}"  name="age"/>
+                            <field name="street" placeholder="Adresse" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    #Graph
+    <record id="clients_graph" model="ir.ui.view">
+        <field name="name">voiture.client.graph</field>
+        <field name="model">voiture.client</field>
+        <field name="arch" type="xml">
+            <graph string="Clients" sample="3">
+                <field name="Type"/>
+            </graph>
+        </field>
+    </record>
+
+
+    #ACTION
+    <record id="clients_action" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">voiture.client</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Inserez Vos Informations
+            </p>
+        </field>
+    </record>
+
+
+    #MENU
+    <menuitem
+            id="location_voiture"
+            name="Location Voiture"
+    />
+
+    <menuitem
+            id="client_root"
+            name="Clients"
+            parent="location_voiture"
+    />
+    <menuitem
+            id="sub_client_root"
+            name="Clients"
+            action="clients_action"
+            parent="client_root"
+            sequence="10"
+
+    />
+
+
+</odoo>

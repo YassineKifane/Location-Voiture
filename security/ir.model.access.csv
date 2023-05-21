@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_voiture_client,access.voiture.client,model_voiture_client,,1,1,1,1
+access_vehicle_brand,access.vehicle.brand,model_vehicle_brand,,1,1,1,1
+access_voiture_cars,access.voiture.cars,model_voiture_cars,,1,1,1,1
+access_location_voiture,access.location.voiture,model_location_voiture,,1,1,1,1

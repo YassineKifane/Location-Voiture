@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    #tree
+    <record id="location_voitures_tree" model="ir.ui.view">
+        <field name="name">location.voiture.tree</field>
+        <field name="model">location.voiture</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="client_name"/>
+                <field name="voiture_name"/>
+                <field name="nbrjourlocation"/>
+                <field name="prixtotal"/>
+            </tree>
+        </field>
+    </record>
+
+    #Formulaire
+
+    #Form
+    <record id="location_form" model="ir.ui.view">
+        <field name="name">location.voiture.form</field>
+        <field name="model">location.voiture</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="client_name" placeholder="Client" required="True"/>
+                            <field name="identite_client"/>
+                            <field name="mobile_client"/>
+                            <field name="mail_client"/>
+                        </group>
+                        <group>
+                            <field name="voiture_name" placeholder="Voiture" required="True"/>
+                            <field name="matricule"/>
+                            <field name="transmission"/>
+                            <field name="energie"/>
+                            <field name="prix_parjr"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="jours_de_debut" placeholder="Jour de la Debut"/>
+                        </group>
+                        <group>
+                            <field name="jours_de_fin" placeholder="Jour de la Fin"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="nbrjourlocation"/>
+                        </group>
+                        <group>
+                            <field name="prixtotal"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    #ACTION
+    <record id="location_action" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">location.voiture</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Inserez Vos Informations
+            </p>
+        </field>
+    </record>
+
+    #MENU
+
+    <menuitem
+            id="location_root"
+            name="Locations"
+            parent="location_voiture"
+    />
+    <menuitem
+            id="sub_location_root"
+            name="Locations"
+            action="location_action"
+            parent="location_root"
+            sequence="10"
+
+    />
+
+
+
+
+</odoo>

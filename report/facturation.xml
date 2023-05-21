@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="f">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-name="report.external_layout_header">
+                    <div class="header">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img t-att-src="'/Location_Voiture/static/src/img/entete_png.png'"
+                                     style="max-height:120px;width:100%;margin-bottom:30px;"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table border="0" cellpadding="30" style="width:100%; font-size:18px; margin-bottom:70px;">
+                            <tr>
+                                <th>Client</th>
+                                <th>Date de Facturation</th>
+                                <th>Proprietaire</th>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="o.client_name.name"/></td>
+                                <td><t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d / %m / %Y')"/></td>
+                                <td>Mycar</td>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="o.mobile_client"/></td>
+                                <td></td>
+                                <td>0682289147</td>
+                            </tr>
+                        </table>
+
+                        <table class="table table-sm o_main_table" name="facturation" style="margin-bottom:70px;">
+                                <tr style="font-size:25px;color:#5a7fb4">
+                                    <th name="th_reference">
+                                        <span>Voiture</span>
+                                    </th>
+                                    <th name="th_matricule">
+                                        <span>Matricule</span>
+                                    </th>
+                                    <th name="th_energie">
+                                        <span>Energie</span>
+                                    </th>
+                                    <th name="th_days">
+                                        <span>Nombre Jour de Location</span>
+                                    </th>
+                                    <th name="th_prix">
+                                        <span>Prix Total</span>
+                                    </th>
+                                </tr>
+                                <tr style="font-size:18px;">
+                                    <td><t t-esc="o.voiture_name.name"/></td>
+                                    <td><t t-esc="o.matricule"/></td>
+                                    <td><t t-esc="o.energie"/></td>
+                                    <td><t t-esc="o.nbrjourlocation"/></td>
+                                    <td><t t-esc="o.prixtotal"/></td>
+                                </tr>
+                        </table>
+                        <p style="position:fixed;top:530px;left:600px;font:bold 20px Arial,serif;">
+                                <b>Signature et Cachet :</b>
+                            </p>
+                        <div style="position:fixed;top:800px;padding:18px ;left:187px; width:60% ;border:1px solid black;">En cas de retard de paiement, seront exigibles, conformément à l'article L 441-6 du code de commerce, une indemnité calculée sur la base de trois fois le taux de l'intérêt légal en vigueur ainsi qu'une indemnité forfaitaire pour frais de recouvrement de 40 euros.</div>
+                    </div>
+                </t>
+
+                <t t-name="report.external_layout_footer">
+                    <div class="footer">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img t-att-src="'/Location_Voiture/static/src/img/entete_png.png'"
+                                     style="max-height:120px;width:100%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+
+            </t>
+        </t>
+    </template>
+</odoo>
